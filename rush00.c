@@ -1,110 +1,103 @@
 #include <unistd.h>
 
+void case1(void)
+{
+	write(1, "o\n", 2);
+}
+
+void case2(int y)
+{
+	write(1, "o\n", 2);
+	for (int i = 0; i < y - 2; i++)
+	{
+		write(1, "|\n", 2);
+	}
+	write(1, "o\n", 2);
+}
+
+void case3(int x)
+{
+	write(1, "o", 1);
+	for (int i = 0; i < x - 2; i++)
+	{
+		write(1, "-", 1);
+	}
+	write(1, "o\n", 2);
+}
+
+void case4(int x, int y)
+{
+	write(1, "o", 1);
+	for (int i = 0; i < x - 2; i++)
+	{
+		write(1, "-", 1);
+	}
+	write(1, "o\n", 2);
+	for (int j = 0; j < y - 2; j++)
+	{
+		write(1, "|", 1);
+		for (int i = 0; i < x - 2; i++)
+		{
+			write(1, " ", 1);
+		}
+		write(1, "|\n", 2);
+	}
+	write(1, "o", 1);
+	for (int i = 0; i < x - 2; i++)
+	{
+		write(1, "-", 1);
+	}
+	write(1, "o\n", 2);
+}
+
+void draw_rectangle(int x, int y)
+{
+	write(1, "o", 1);
+	for (int i = 0; i < x - 2; i++)
+	{
+		write(1, "-", 1);
+	}
+	write(1, "o\n", 2);
+	for (int j = 0; j < y - 2; j++)
+	{
+		write(1, "|", 1);
+		for (int i = 0; i < x - 2; i++)
+		{
+			write(1, " ", 1);
+		}
+		write(1, "|\n", 2);
+	}
+	write(1, "o", 1);
+	for (int i = 0; i < x - 2; i++)
+	{
+		write(1, "-", 1);
+	}
+	write(1, "o\n", 2);
+}
+
 void rush(int x, int y)
 {
-
-	int contx;
-	int conty;
-
-	contx = 0;
-	conty = 0;
-
-	// Caso especial para largura e altura iguais a 1
+	if (x <= 0 || y <= 0)
+		return;
 	if (x == 1 && y == 1)
 	{
-		write(1, "o\n", 2);
+		case1();
 		return;
 	}
-
-	// Caso especial para largura igual a 1 e altura maior que 1
 	if (x == 1)
 	{
-		write(1, "o\n", 2);
-		while (conty < y-2)
-		{
-			write(1, "|\n", 2);
-			conty++;
-		}
-		write(1, "o\n", 2);
+		case2(y);
 		return;
 	}
-
-	// Caso especial para altura igual a 1 e largura maior que 1
 	if (y == 1)
 	{
-		write(1, "o", 1);
-		while (contx < x - 2)
-		{
-			write(1, "-", 1);
-			contx++;
-		}
-		write(1, "o\n", 2);
+		case3(x);
 		return;
 	}
-	
-	// caso especial quando x=5 e y=3
 	if (x == 5 && y == 3)
 	{
-	write(1, "o", 1);
-	while (contx < x-2)
-	{
-		write(1, "-", 1);
-		contx++;
+		case4(x, y);
+		return;
 	}
-	write(1, "o\n", 2);
-
-	while (conty < y-2)
-	{
-		int space = 0;
-		write(1, "|", 1);
-		while (space < x-2)
-		{
-			write(1, " ", 1);
-			space++;
-		}
-		write(1, "|\n", 2);
-		conty++;
-	}
-	contx = 0;
-	write(1, "o", 1);
-	while (contx < x-2)
-	{
-		write(1, "-", 1);
-		contx++;
-	}
-	write(1, "o\n", 2);
-	return;
-	}
-
-	contx = 0;
-	conty = 0;
-
-	write(1, "o", 1);
-	while (contx < x)
-	{
-		write(1, "-", 1);
-		contx++;
-	}
-	write(1, "o\n", 2);
-
-	while (conty < y)
-	{
-		int space = 0;
-		write(1, "|", 1);
-		while (space < x)
-		{
-			write(1, " ", 1);
-			space++;
-		}
-		write(1, "|\n", 2);
-		conty++;
-	}
-	contx = 0;
-	write(1, "o", 1);
-	while (contx < x)
-	{
-		write(1, "-", 1);
-		contx++;
-	}
-	write(1, "o\n", 2);
+	draw_rectangle(x, y);
 }
