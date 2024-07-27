@@ -59,3 +59,4 @@ void rush(int x, int y)
     if (y > 1)
         draw_top_bottom(x);
 }
+//feito
